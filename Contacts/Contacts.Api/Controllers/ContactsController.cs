@@ -24,13 +24,14 @@ namespace Contacts.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] ContactDto contactDto)
         {
-            // Ensure the 'Name' field is required
-            if (string.IsNullOrWhiteSpace(contactDto.Name))
-                return BadRequest("Name is required.");
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState); // Return validation errors
+            }
 
             await _createContactUseCase.Execute(contactDto);
 
-            return Created(string.Empty, contactDto);
+            return Created(string.Empty, contactDto); //we should return the created contact and the url to get to the entity (as required by REST but ...)
         }
 
       
