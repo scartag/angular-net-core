@@ -1,0 +1,39 @@
+
+<div class="m-4 flow-root">
+  <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+      <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+        <table class="min-w-full divide-y divide-gray-300">
+          <thead class="bg-gray-50">
+          <tr>
+            <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Name</th>
+            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Address</th>
+          </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200 bg-white">
+
+          <tr *ngFor="let item of paginatedContacts">
+            <td class=" whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"> {{item.name}} </td>
+            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"> {{item.address}}</td>
+          </tr>
+          </tbody>
+        </table>
+        <nav [ngClass]="(contacts.length <= pageSize) ? 'opacity-25' : ''" class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6" aria-label="Pagination">
+          <div class="hidden sm:block">
+            <p class="text-sm text-gray-700">
+              Showing
+              <span class="font-medium">{{ currentPage }}</span>
+              of
+              <span class="font-medium">{{ totalPages }}</span>
+              pages
+            </p>
+          </div>
+          <div class="flex flex-1 justify-between sm:justify-end">
+            <button (click)="prevPage()" [disabled]="(contacts.length <= pageSize || currentPage == 1)"  class="disabled:opacity-25 disabled:pointer-events-none relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0">Previous</button>
+            <button (click)="nextPage()" [disabled]="(contacts.length <= pageSize || currentPage == totalPages)"  class="disabled:opacity-25 disabled:pointer-events-none relative ml-3 inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0">Next</button>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
